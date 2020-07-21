@@ -30,7 +30,7 @@ The postgres database is managed using [knex](http://knexjs.org/). The migration
 
 ## General Thoughts and Notes
 
-- There's one quirk to deployment - you'll need to run a function called `addLedgerX` after running the migrations. It's in the `./helpers` directory. Contract records have a foreign key reference to exchange records so the functions that add them to the tables will fail if there's not a corresponding exchange. My plan was to build this into the start script but I never got around for it. When I deployed, I just called the function manually from the heroku cli.
+> There's one quirk to deployment - you'll need to run a function called `addLedgerX` after running the migrations. It's in the `./helpers` directory. Contract records have a foreign key reference to exchange records so the functions that add them to the tables will fail if there's not a corresponding exchange. My plan was to build this into the start script but I never got around for it. When I deployed, I just called the function manually from the heroku cli.
 - I initially planned on using this project to mess around with Amazon Lambda functions (or similar) for the scrape and tweet functions. I'd fire the function on a schedule, scrape, parse, and send the result off to an endpoint to store in the database. I never actually deployed this version, and got a job so stopped working on it. 
 - Endpoints are hardcoded, sorry about that. They aren't referenced all that frequently (just in the files in the helpers director) so will be easy to refactor into an environment variable.
 - Tests are non-existent. Again, I started them, but got a job and never revisited. 
@@ -42,7 +42,7 @@ The postgres database is managed using [knex](http://knexjs.org/). The migration
 -----|-----|-----|-----
 POST|`contracts/`|None, pending|Adds an array of contract objects to the db
 GET|`contracts/options/greatest/:date`|None, pending|Returns the most active contract on a given date
-GET|`contracts/opttions/sum/:date`|None, pending|Returns an object with total number of options contracts traded on a given date
+GET|`contracts/options/sum/:date`|None, pending|Returns an object with total number of options contracts traded on a given date
 GET|`contracts/opions/expiring/:date`|None, pending|Returns an array of options objects that have non-zero open interest that are expiring on a given date
 
 
